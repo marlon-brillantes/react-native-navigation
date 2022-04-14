@@ -9,7 +9,8 @@ import com.reactnativenavigation.NavigationApplication
 fun Context.isDebug(): Boolean {
     return (applicationContext as ReactApplication).reactNativeHost.useDeveloperSupport
 }
-fun isDarkMode() = NavigationApplication.instance.isDarkMode()
+fun isDarkMode() = false
+//fun isDarkMode() = NavigationApplication.instance.isDarkMode()
 fun Context.isDarkMode(): Boolean =
     (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
 fun Configuration.isDarkMode() = (uiMode and Configuration.UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
