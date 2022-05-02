@@ -1,7 +1,12 @@
-package com.reactnativenavigation.react;
+package com.reactnativenavigation.playground;
+
+import static com.reactnativenavigation.utils.UiUtils.pxToDp;
+
+import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.Arguments;
@@ -20,6 +25,9 @@ import com.reactnativenavigation.options.Options;
 import com.reactnativenavigation.options.parsers.JSONParser;
 import com.reactnativenavigation.options.parsers.LayoutNodeParser;
 import com.reactnativenavigation.options.parsers.TypefaceLoader;
+import com.reactnativenavigation.react.Constants;
+import com.reactnativenavigation.react.LifecycleEventListenerAdapter;
+import com.reactnativenavigation.react.NativeCommandListener;
 import com.reactnativenavigation.react.events.EventEmitter;
 import com.reactnativenavigation.utils.LaunchArgsParser;
 import com.reactnativenavigation.utils.Now;
@@ -32,11 +40,7 @@ import com.reactnativenavigation.viewcontrollers.viewcontroller.ViewController;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.reactnativenavigation.utils.UiUtils.pxToDp;
-
-import android.app.Activity;
-
-public class NavigationModule extends ReactContextBaseJavaModule {
+public class WixNavigationModule2 extends ReactContextBaseJavaModule {
     private static final String NAME = "RNNBridgeModule";
 
     private final Now now = new Now();
@@ -46,11 +50,11 @@ public class NavigationModule extends ReactContextBaseJavaModule {
     private EventEmitter eventEmitter;
 
     @SuppressWarnings("WeakerAccess")
-    public NavigationModule(ReactApplicationContext reactContext, ReactInstanceManager reactInstanceManager, LayoutFactory layoutFactory) {
+    public WixNavigationModule2(ReactApplicationContext reactContext, ReactInstanceManager reactInstanceManager, LayoutFactory layoutFactory) {
         this(reactContext, reactInstanceManager, new JSONParser(), layoutFactory);
     }
 
-    public NavigationModule(ReactApplicationContext reactContext, ReactInstanceManager reactInstanceManager, JSONParser jsonParser, LayoutFactory layoutFactory) {
+    public WixNavigationModule2(ReactApplicationContext reactContext, ReactInstanceManager reactInstanceManager, JSONParser jsonParser, LayoutFactory layoutFactory) {
         super(reactContext);
         this.reactInstanceManager = reactInstanceManager;
         this.jsonParser = jsonParser;
@@ -70,7 +74,7 @@ public class NavigationModule extends ReactContextBaseJavaModule {
                         activity(),
                         eventEmitter,
                         navigator().getChildRegistry(),
-                        ((NavigationApplication) activity().getApplication()).getExternalComponents()
+                        ((MainApplication) activity().getApplication()).getExternalComponents()
                 );
                 UiUtils.runOnMainThread(() -> navigator().onHostResume());
             }
@@ -210,13 +214,15 @@ public class NavigationModule extends ReactContextBaseJavaModule {
     }
 
     private Navigator navigator() {
-        return activity().getNavigator();
+        WixBaseFragment frag = (WixBaseFragment)activity().getSupportFragmentManager().findFragmentByTag(NavigationFragment.Companion.getTAG());
+        return frag.navigator;
     }
 
     private Options parse(@Nullable ReadableMap mergeOptions) {
         ReactApplicationContext ctx = getReactApplicationContext();
-        return mergeOptions ==
-                null ? Options.EMPTY : Options.parse(ctx, new TypefaceLoader(activity()), jsonParser.parse(mergeOptions));
+//        return mergeOptions ==
+//                null ? Options.EMPTY : Options.parse(ctx, new TypefaceLoader(activity()), jsonParser.parse(mergeOptions));
+        return Options.EMPTY;
     }
 
     protected void handle(Runnable task) {
@@ -227,8 +233,8 @@ public class NavigationModule extends ReactContextBaseJavaModule {
         });
     }
 
-    protected NavigationActivity activity() {
-        return (NavigationActivity) getCurrentActivity();
+    protected AppCompatActivity activity() {
+        return (AppCompatActivity) getCurrentActivity();
     }
 
     @Override
