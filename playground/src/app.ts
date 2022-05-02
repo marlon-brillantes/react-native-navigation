@@ -27,73 +27,83 @@ function start() {
   });
 }
 
+/**
+ * Code is commented out because these layouts are requesting theming. 
+ * The native code that checks the theming is coupled to the NavigationApp/NavigationActivity.
+ * 
+ * The current experiment is to see if the app loads outside of NavigationApp/NavigationActivity.
+ */
 function setRoot() {
   Navigation.setRoot({
-    root: {
-      bottomTabs: {
-        options: {
-          bottomTabs: {
-            testID: testIDs.MAIN_BOTTOM_TABS,
-          },
-        },
-        children: [
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'Layouts',
-                  },
-                },
-              ],
-              options: {
-                bottomTab: {
-                  text: 'Layouts',
-                  icon: require('../img/layouts.png'),
-                  selectedIcon: require('../img/layouts_selected.png'),
-                  testID: testIDs.LAYOUTS_TAB,
-                },
-              },
-            },
-          },
-          {
-            stack: {
-              children: [
-                {
-                  component: {
-                    name: 'Options',
-                  },
-                },
-              ],
-              options: {
-                topBar: {
-                  title: {
-                    text: 'Default Title',
-                  },
-                },
-                bottomTab: {
-                  text: 'Options',
-                  icon: require('../img/options.png'),
-                  selectedIcon: require('../img/options_selected.png'),
-                  testID: testIDs.OPTIONS_TAB,
-                },
-              },
-            },
-          },
-          {
-            stack: {
-              id: 'NavigationTabStack',
-              children: [
-                {
-                  component: {
-                    name: 'Navigation',
-                  },
-                },
-              ],
-            },
-          },
-        ],
+    root: { 
+
+      component: {
+        name: 'Layouts',
       },
+      // bottomTabs: {
+      //   options: {
+      //     bottomTabs: {
+      //       testID: testIDs.MAIN_BOTTOM_TABS,
+      //     },
+      //   },
+      //   children: [
+      //     {
+      //       stack: {
+      //         children: [
+      //           {
+      //             component: {
+      //               name: 'Layouts',
+      //             },
+      //           },
+      //         ],
+      //         options: {
+      //           bottomTab: {
+      //             text: 'Layouts',
+      //             icon: require('../img/layouts.png'),
+      //             selectedIcon: require('../img/layouts_selected.png'),
+      //             testID: testIDs.LAYOUTS_TAB,
+      //           },
+      //         },
+      //       },
+      //     },
+      //     {
+      //       stack: {
+      //         children: [
+      //           {
+      //             component: {
+      //               name: 'Options',
+      //             },
+      //           },
+      //         ],
+      //         options: {
+      //           topBar: {
+      //             title: {
+      //               text: 'Default Title',
+      //             },
+      //           },
+      //           bottomTab: {
+      //             text: 'Options',
+      //             icon: require('../img/options.png'),
+      //             selectedIcon: require('../img/options_selected.png'),
+      //             testID: testIDs.OPTIONS_TAB,
+      //           },
+      //         },
+      //       },
+      //     },
+      //     {
+      //       stack: {
+      //         id: 'NavigationTabStack',
+      //         children: [
+      //           {
+      //             component: {
+      //               name: 'Navigation',
+      //             },
+      //           },
+      //         ],
+      //       },
+      //     },
+      //   ],
+      // },
     },
   });
 }

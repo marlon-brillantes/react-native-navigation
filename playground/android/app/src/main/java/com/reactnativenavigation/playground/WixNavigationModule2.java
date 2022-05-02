@@ -6,6 +6,7 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.Arguments;
@@ -213,7 +214,8 @@ public class WixNavigationModule2 extends ReactContextBaseJavaModule {
     }
 
     private Navigator navigator() {
-        return activity().getNavigator();
+        WixBaseFragment frag = (WixBaseFragment)activity().getSupportFragmentManager().findFragmentByTag(NavigationFragment.Companion.getTAG());
+        return frag.navigator;
     }
 
     private Options parse(@Nullable ReadableMap mergeOptions) {
@@ -231,16 +233,16 @@ public class WixNavigationModule2 extends ReactContextBaseJavaModule {
         });
     }
 
-    protected NavigationActivity activity() {
-        return (NavigationActivity) getCurrentActivity();
+    protected AppCompatActivity activity() {
+        return (AppCompatActivity) getCurrentActivity();
     }
 
     @Override
     public void onCatalystInstanceDestroy() {
-        final NavigationActivity navigationActivity = activity();
-        if (navigationActivity != null) {
-            navigationActivity.onCatalystInstanceDestroy();
-        }
+//        final NavigationActivity navigationActivity = activity();
+//        if (navigationActivity != null) {
+//            navigationActivity.onCatalystInstanceDestroy();
+//        }
         super.onCatalystInstanceDestroy();
     }
 }

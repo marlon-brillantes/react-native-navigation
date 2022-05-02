@@ -233,10 +233,10 @@ public class NavigationModule extends ReactContextBaseJavaModule {
 
     @Override
     public void onCatalystInstanceDestroy() {
-        final NavigationActivity navigationActivity = activity();
-        if (navigationActivity != null) {
-            navigationActivity.onCatalystInstanceDestroy();
-        }
+//        final NavigationActivity navigationActivity = activity();
+//        if (navigationActivity != null) {
+//            navigationActivity.onCatalystInstanceDestroy();
+//        }
         super.onCatalystInstanceDestroy();
     }
 }

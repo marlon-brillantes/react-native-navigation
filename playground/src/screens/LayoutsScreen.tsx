@@ -52,7 +52,7 @@ export default class LayoutsScreen extends NavigationComponent<NavigationCompone
   static options(): Options {
     return {
       bottomTabs: {
-        visible: true,
+        visible: false,
       },
       topBar: {
         testID: WELCOME_SCREEN_HEADER,
